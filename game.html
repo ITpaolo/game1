@@ -19,11 +19,12 @@
     function preload() {
 
         game.load.image('sky', 'assets/sky.png');
-        game.load.image('ground', 'assets/platform_fix.png');
-        game.load.image('firstaid', 'assets/firstaid.png');
+        game.load.image('ground', 'assets/platform.png');
+        game.load.image('coin', 'assets/coin.png');
         game.load.image('cloud', 'assets/cloud.png');
         game.load.image('clouds', 'assets/clouds.png');
         game.load.image('jesus', 'assets/JesusPixel.png');
+        game.load.image('stone', 'assets/stone.png');
         game.load.spritesheet('dude', 'assets/dude.png');
 
     }
@@ -37,9 +38,9 @@
     var jesus;
 
 
-    var firstaids;
-    var Life = 0;
-    var LifeText;
+    var coins;
+    var Coins = 0;
+    var CoinText;
 
     var box;
 
@@ -85,7 +86,7 @@
         }
 
 
-        box = platforms.create(300, 310, 'ground');
+        box = platforms.create(300, 310, 'stone');
         box.enableBody = true;
         box.body.gravity.y = 200;
         box.body.immovable = false;
@@ -157,48 +158,48 @@
         //player.animations.add('left', [0, 1, 2, 3], 10, true);
         //player.animations.add('right', [5, 6, 7, 8], 10, true);
 
-        //  Finally some firstaids to collect
-        firstaids = game.add.group();
+        //  Finally some coins to collect
+        coins = game.add.group();
 
-        //  We will enable physics for any firstaid that is created in this group
-        firstaids.enableBody = true;
+        //  We will enable physics for any coin that is created in this group
+        coins.enableBody = true;
 
         //  Here we'll create 12 of them evenly spaced apart
         for (var i = 1; i < 15; i++) {
-            //  Create a firstaid inside of the 'firstaids' group
-            var firstaid = firstaids.create(i * 70, 310, 'firstaid');
+            //  Create a coin inside of the 'coins' group
+            var coin = coins.create(i * 70, 310, 'coin');
 
             //  Let gravity do its thing
-            firstaid.body.gravity.y = 100;
-            firstaid.body.bounce.y = 0.1;
+            coin.body.gravity.y = 100;
+            coin.body.bounce.y = 0.1;
 
 
-            //  This just gives each firstaid a slightly random bounce value
-            // firstaid.body.bounce.y = 0.7 + Math.random() * 0.2;
+            //  This just gives each coin a slightly random bounce value
+            // coin.body.bounce.y = 0.7 + Math.random() * 0.2;
         }
 
         //  The score
         //lives = 5;
         //lives--;
-        LifeText = game.add.text(16, 16, 'Life:', {fontSize: '32px', fill: '#000'});
-        //LifeText2 = game.add.text(16, 16*2, 'Life: '+lives, { fontSize: '32px', fill: '#f00' });
+        CoinText = game.add.text(16, 16, 'Coins: 0', {fontSize: '32px', fill: '#000'});
+        //CoinText2 = game.add.text(16, 16*2, 'Coins: '+lives, { fontSize: '32px', fill: '#f00' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
 
 
         game.camera.follow(player);
-        LifeText.fixedToCamera = true;
+        CoinText.fixedToCamera = true;
 
     }
 
     function update() {
-        //  Collide the player and the firstaids with the platforms
+        //  Collide the player and the coins with the platforms
         game.physics.arcade.collide(player, platforms);
-        game.physics.arcade.collide(firstaids, platforms);
+        game.physics.arcade.collide(coins, platforms);
         game.physics.arcade.collide(box, platforms);
-        //  Checks to see if the player overlaps with any of the firstaids, if he does call the collectfirstaid function
-        game.physics.arcade.overlap(player, firstaids, collectfirstaid, null, this);
+        //  Checks to see if the player overlaps with any of the coins, if he does call the collectcoin function
+        game.physics.arcade.overlap(player, coins, collectcoin, null, this);
 
 
         //  Reset the players velocity (movement)
@@ -211,7 +212,7 @@
             player.body.velocity.x = -150;
 
             player.animations.play('left');
-            // LifeText CameraFix
+            // CoinText CameraFix
             game.camera.x -= 4;
         }
         else if (cursors.right.isDown) {
@@ -221,7 +222,7 @@
             player.animations.play
             ('right');
 
-            //LifeText CameraFix
+            //CoinText CameraFix
             game.camera.x += 4;
         }
         else {
@@ -261,21 +262,21 @@
 
     }
 
-    function collectfirstaid(player, firstaid) {
+    function collectcoin(player, coin) {
 
-        // Removes the firstaid from the screen
-        firstaid.kill();
+        // Removes the coin from the screen
+        coin.kill();
 
         //  Add and update the score
-        Life += 10;
-        LifeText.text = 'Life: ' + Life;
+        Coins += 1;
+        CoinText.text = 'Coins: ' + Coins;
         // Leben auf Grün, wenn über 20
-        if (Life >= 20) {
-            LifeText.fill = '#00ff00';
+        if (Coins >= 5) {
+            CoinText.fill = '#00ff00';
         }
         // Leben auf Rot, wenn unter 20
-        else if (Life < 20) {
-            LifeText.fill = '#ff0000';
+        else if (Coins < 3) {
+            CoinText.fill = '#ff0000';
         }
     }
 
