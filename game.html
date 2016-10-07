@@ -26,6 +26,7 @@
         game.load.image('jesus', 'assets/JesusPixel.png');
         game.load.image('stone', 'assets/stone.png');
         game.load.image('sun', 'assets/sun.png');
+        game.load.image('palm', 'assets/palm.png');
         game.load.spritesheet('dude', 'assets/dude.png');
 
     }
@@ -38,6 +39,7 @@
     var clouds;
     var jesus;
     var sun;
+    var palm;
 
 
     var coins;
@@ -90,6 +92,13 @@
             ledge = platforms.create(blockX + ((t - 1) * blockW), blockY, 'ground');
             ledge.body.immovable = Math.random() < .5 ? true : false;
         }
+
+        palm = platforms.create(15, 480, 'palm');
+        palm.enableBody = true;
+        palm.body.gravity.y = 0;
+        palm.body.immovable = true;
+        palm.width = 64;
+        palm.height = 64;
 
         sun = platforms.create(200, 10, 'sun');
         sun.enableBody = true;
@@ -152,7 +161,7 @@
          --------------------------------------------------------*/
 
         // The player and its settings
-        player = game.add.sprite(32, game.world.height - 150, 'dude');
+        player = game.add.sprite(90, game.world.height - 150, 'dude');
 
         //  We need to enable physics on the player
         game.physics.arcade.enable(player);
