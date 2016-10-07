@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Browsergame</title>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
     <style type="text/css">
@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
 
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update});
 
     function preload() {
 
@@ -23,14 +23,15 @@
         game.load.image('firstaid', 'assets/firstaid.png');
         game.load.image('cloud', 'assets/cloud.png');
         game.load.image('clouds', 'assets/clouds.png');
-        game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+        game.load.spritesheet('dude', 'assets/dude_mini.png', 32, 60);
 
     }
 
     var player;
     var platforms;
     var cursors;
-    var cloud;
+    var cloud1;
+    var cloud2;
     var clouds;
 
 
@@ -81,11 +82,11 @@
             ledge.body.immovable = Math.random() < .5 ? true : false;
         }
 
-        
-            box = platforms.create(300, 310, 'ground');
-            box.enableBody = true;
-            box.body.gravity.y = 200;
-            box.body.immovable = false;
+
+        box = platforms.create(300, 310, 'ground');
+        box.enableBody = true;
+        box.body.gravity.y = 200;
+        box.body.immovable = false;
 
 
         clouds = platforms.create(400, 100, 'clouds');
@@ -94,69 +95,70 @@
 
         clouds.body.immovable = true;
 
-        cloud = platforms.create(550, 150, 'cloud');
-        cloud.anchor.x = 0.5;
-        cloud.body.velocity.x = 20 + Math.random() * 80;
-
-        cloud.body.immovable = true;
-
         clouds = platforms.create(600, 200, 'clouds');
         clouds.anchor.x = 0.5;
         clouds.body.velocity.x = 20 + Math.random() * 100;
 
         clouds.body.immovable = true;
 
-        cloud = platforms.create(650, 250, 'cloud');
-        cloud.anchor.x = 0.5;
-        cloud.body.velocity.x = 20 + Math.random() * 130;
 
-        cloud.body.immovable = true;
+        cloud1 = platforms.create(550, 150, 'cloud');
+        cloud1.anchor.x = 0.5;
+        cloud1.body.velocity.x = 20 + Math.random() * 80;
+        cloud1.body.immovable = false;
+        //cloud1.body.moves = false;
 
-
-            /*--------------------------------------------------------
-                clouds.enableBody = true;
-                clouds.customSeparateX = true;
-                clouds.customSeparateY = true;
-                clouds.allowGravity = false;
-                clouds.body.immovable = true;
-                clouds.playerLocked = true;
-
-        //  Now let's create two ledges
-
-        ledge = platforms.create(-150, 250, 'ground');
-        ledge.body.immovable = true;
-
-        ledge = platforms.create(300, 500, 'ground');
-        ledge.body.immovable = false;
-
-        ledge = platforms.create(500, 500, 'ground');
-        ledge.body.immovable = true;
-             --------------------------------------------------------*/
-
-            // The player and its settings
-            player = game.add.sprite(32, game.world.height - 150, 'dude');
-
-            //  We need to enable physics on the player
-            game.physics.arcade.enable(player);
-
-            //  Player physics properties. Give the little guy a slight bounce.
-            player.body.bounce.y = 0.1;
-            player.body.gravity.y = 500;
-            player.body.collideWorldBounds = false;
+        cloud2 = platforms.create(650, 250, 'cloud');
+        cloud2.anchor.x = 0.5;
+        cloud2.body.velocity.x = 20 + Math.random() * 130;
+        cloud2.body.immovable = false;
+        //cloud2.body.moves = false;
 
 
-            //  Our two animations, walking left and right.
-            player.animations.add('left', [0, 1, 2, 3], 10, true);
-            player.animations.add('right', [5, 6, 7, 8], 10, true);
+        /*--------------------------------------------------------
+         clouds.enableBody = true;
+         clouds.customSeparateX = true;
+         clouds.customSeparateY = true;
+         clouds.allowGravity = false;
+         clouds.body.immovable = true;
+         clouds.playerLocked = true;
 
-            //  Finally some firstaids to collect
-            firstaids = game.add.group();
+         //  Now let's create two ledges
 
-            //  We will enable physics for any firstaid that is created in this group
-            firstaids.enableBody = true;
+         ledge = platforms.create(-150, 250, 'ground');
+         ledge.body.immovable = true;
 
-            //  Here we'll create 12 of them evenly spaced apart
-            for (var i = 1; i < 15; i++) {
+         ledge = platforms.create(300, 500, 'ground');
+         ledge.body.immovable = false;
+
+         ledge = platforms.create(500, 500, 'ground');
+         ledge.body.immovable = true;
+         --------------------------------------------------------*/
+
+        // The player and its settings
+        player = game.add.sprite(32, game.world.height - 150, 'dude');
+
+        //  We need to enable physics on the player
+        game.physics.arcade.enable(player);
+
+        //  Player physics properties. Give the little guy a slight bounce.
+        player.body.bounce.y = 0.1;
+        player.body.gravity.y = 500;
+        player.body.collideWorldBounds = false;
+
+
+        //  Our two animations, walking left and right.
+        player.animations.add('left', [0, 1, 2, 3], 10, true);
+        player.animations.add('right', [5, 6, 7, 8], 10, true);
+
+        //  Finally some firstaids to collect
+        firstaids = game.add.group();
+
+        //  We will enable physics for any firstaid that is created in this group
+        firstaids.enableBody = true;
+
+        //  Here we'll create 12 of them evenly spaced apart
+        for (var i = 1; i < 15; i++) {
             //  Create a firstaid inside of the 'firstaids' group
             var firstaid = firstaids.create(i * 70, 310, 'firstaid');
 
@@ -169,36 +171,35 @@
             // firstaid.body.bounce.y = 0.7 + Math.random() * 0.2;
         }
 
-            //  The score
-            //lives = 5;
-            //lives--;
-            LifeText = game.add.text(16, 16, 'Life:', {fontSize: '32px', fill: '#000' });
-            //LifeText2 = game.add.text(16, 16*2, 'Life: '+lives, { fontSize: '32px', fill: '#f00' });
+        //  The score
+        //lives = 5;
+        //lives--;
+        LifeText = game.add.text(16, 16, 'Life:', {fontSize: '32px', fill: '#000'});
+        //LifeText2 = game.add.text(16, 16*2, 'Life: '+lives, { fontSize: '32px', fill: '#f00' });
 
-            //  Our controls.
-            cursors = game.input.keyboard.createCursorKeys();
+        //  Our controls.
+        cursors = game.input.keyboard.createCursorKeys();
 
 
-                game.camera.follow(player);
-            LifeText.fixedToCamera = true;
+        game.camera.follow(player);
+        LifeText.fixedToCamera = true;
 
     }
 
-        function update() {
-            //  Collide the player and the firstaids with the platforms
+    function update() {
+        //  Collide the player and the firstaids with the platforms
         game.physics.arcade.collide(player, platforms);
         game.physics.arcade.collide(firstaids, platforms);
         game.physics.arcade.collide(box, platforms);
-            //  Checks to see if the player overlaps with any of the firstaids, if he does call the collectfirstaid function
+        //  Checks to see if the player overlaps with any of the firstaids, if he does call the collectfirstaid function
         game.physics.arcade.overlap(player, firstaids, collectfirstaid, null, this);
 
 
-            //  Reset the players velocity (movement)
+        //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
 
 
-        if (cursors.left.isDown)
-        {
+        if (cursors.left.isDown) {
 
             //  Move to the left
             player.body.velocity.x = -150;
@@ -207,8 +208,7 @@
             // LifeText CameraFix
             game.camera.x -= 4;
         }
-        else if (cursors.right.isDown)
-        {
+        else if (cursors.right.isDown) {
             //  Move to the right
             player.body.velocity.x = 150;
 
@@ -218,33 +218,38 @@
             //LifeText CameraFix
             game.camera.x += 4;
         }
-        else
-        {
+        else {
             //  Stand still
             player.animations.stop();
 
             player.frame = 4;
         }
 
-            //  Allow the player to jump if they are touching the ground.
-        if (cursors.up.isDown && player.body.touching.down)
-        {
-            player.body.velocity.y
-                    = -350
-
-            ;
+        //  Allow the player to jump if they are touching the ground.
+        if (cursors.up.isDown && player.body.touching.down) {
+            player.body.velocity.y = -350;
         }
 
-            //console.log(player.body.y);
-        if (player.body.y>700) {
+        //console.log(player.body.y);
+        if (player.body.y > 700) {
             alert(
                     'Game Over! Lets try again!');
-            location.reload();
+            location.reload(true);
+        }
+
+        // wolkenlogik
+        if (cloud1.body.x>1000 || cloud1.body.x<0) {
+            // bewegung umkehren
+            cloud1.body.velocity.x *= -1;
+        }
+        if (cloud2.body.x>1000 || cloud2.body.x<0) {
+            // bewegung umkehren
+            cloud2.body.velocity.x *= -1;
         }
 
     }
 
-    function collectfirstaid (player, firstaid) {
+    function collectfirstaid(player, firstaid) {
 
         // Removes the firstaid from the screen
         firstaid.kill();
