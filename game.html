@@ -40,6 +40,7 @@
     var jesus;
     var sun;
     var palm;
+    var stateText;
 
 
     var coins;
@@ -209,6 +210,13 @@
 
         game.camera.follow(player);
         CoinText.fixedToCamera = true;
+        //CameraFix for Deathcam
+        //stateText.fixedToCamera = true;
+
+        //Text
+        stateText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#F2F2F2' });
+        stateText.anchor.setTo(1.2, 0.5);
+        stateText.visible = false;
 
     }
 
@@ -256,11 +264,22 @@
             player.body.velocity.y = -350;
         }
 
-        //console.log(player.body.y);
+        /*console.log(player.body.y);
         if (player.body.y > 700) {
             alert(
                     'Game Over! Lets try again!');
             location.reload();
+        }*/
+
+        // Player Die
+        if (player.body.y > 700)
+        {
+            player.kill();
+            stateText.text=" GAME OVER \n Click to restart";
+            stateText.visible = true;
+
+            //the "click to restart" handler
+            game.input.onTap.addOnce(restart,this);
         }
 
         //Jesuz
@@ -297,6 +316,15 @@
         else if (Coins < 3) {
             CoinText.fill = '#ff0000';
         }
+    }
+
+    function restart () {
+
+        //revives the player
+        player.revive();
+        //hides the text
+        stateText.visible = false;
+
     }
 
 </script>
