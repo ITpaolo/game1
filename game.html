@@ -25,6 +25,7 @@
         game.load.image('clouds', 'assets/clouds.png');
         game.load.image('jesus', 'assets/JesusPixel.png');
         game.load.image('stone', 'assets/stone.png');
+        game.load.image('sun', 'assets/sun.png');
         game.load.spritesheet('dude', 'assets/dude.png');
 
     }
@@ -36,6 +37,7 @@
     var cloud2;
     var clouds;
     var jesus;
+    var sun;
 
 
     var coins;
@@ -85,6 +87,10 @@
             ledge.body.immovable = Math.random() < .5 ? true : false;
         }
 
+        sun = platforms.create(200, 10, 'sun');
+        sun.enableBody = true;
+        sun.body.gravity.y = 0;
+        sun.body.immovable = true;
 
         box = platforms.create(300, 310, 'stone');
         box.enableBody = true;
