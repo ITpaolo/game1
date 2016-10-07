@@ -18,7 +18,7 @@
 
     function preload() {
 
-        game.load.image('sky', 'assets/sky.png');
+        game.load.image('background', 'assets/background.png');
         game.load.image('ground', 'assets/platform.png');
         game.load.image('coin', 'assets/coin.png');
         game.load.image('cloud', 'assets/cloud.png');
@@ -54,7 +54,11 @@
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         //  A simple background for our game
-        game.add.sprite(0, 0, 'sky');
+        background = game.add.sprite(0, 0, 'background');
+        background.x = 0;
+        background.y = 0;
+        background.height = game.height;
+        background.width = game.width;
 
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = game.add.group();
@@ -247,7 +251,7 @@
         if (player.body.y > 700) {
             alert(
                     'Game Over! Lets try again!');
-            location.reload(true);
+            location.reload();
         }
 
         //Jesuz
