@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
 
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update});
+    var game = new Phaser.Game(1280, 720, Phaser.AUTO, '', {preload: preload, create: create, update: update});
 
     function preload() {
 
@@ -210,7 +210,7 @@
 
         //Text
         stateText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#F2F2F2' });
-        stateText.anchor.setTo(1.2, 0.5);
+        stateText.anchor.setTo(0.8, 0.2);
         stateText.visible = false;
 
         game.camera.follow(player);
