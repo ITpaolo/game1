@@ -51,7 +51,7 @@
 
     function create() {
 
-        game.world.setBounds(0, 0, 1600, 600);
+        game.world.setBounds(0, 0, 2000, 600);
 
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -190,7 +190,7 @@
             var coin = coins.create(i * 70, 310, 'coin');
 
             //  Let gravity do its thing
-            coin.body.gravity.y = 100;
+            coin.body.gravity.y = 1000;
             coin.body.bounce.y = 0.1;
 
 
