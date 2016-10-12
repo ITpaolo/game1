@@ -48,6 +48,7 @@
     var CoinText;
 
     var box;
+    var legde;
 
     function create() {
 
@@ -78,8 +79,26 @@
         //  This stops it from falling away when you jump on it
         ground.body.immovable = true;
 
-        var ledge = null;
+        //Ledges false / true
+        ledge = platforms.create(525, 450, 'ground');
+        ledge.body.immovable = true;
 
+        ledge = platforms.create(535, 450, 'ground');
+        ledge.body.immovable = true;
+        ledge = platforms.create(545, 450, 'ground');
+        ledge.body.immovable = true;
+
+        ledge = platforms.create(660, 600, 'ground');
+        ledge.body.immovable = false;
+
+        ledge = platforms.create(545, 450, 'ground');
+        ledge.body.immovable = true;
+
+        ledge = platforms.create(300, 500, 'ground');
+        ledge.body.immovable = true;
+
+
+        /*
         // autolevel
         var blocks = 15;
         var blockX = 250;
@@ -93,6 +112,8 @@
             ledge = platforms.create(blockX + ((t - 1) * blockW), blockY, 'ground');
             ledge.body.immovable = Math.random() < .5 ? true : false;
         }
+        */
+
 
         palm = platforms.create(15, 480, 'palm');
         palm.enableBody = true;
@@ -178,6 +199,7 @@
         //player.animations.add('left', [0, 1, 2, 3], 10, true);
         //player.animations.add('right', [5, 6, 7, 8], 10, true);
 
+        /*
         //  Finally some coins to collect
         coins = game.add.group();
 
@@ -197,12 +219,13 @@
             //  This just gives each coin a slightly random bounce value
             // coin.body.bounce.y = 0.7 + Math.random() * 0.2;
         }
+        */
 
         //  The score
         //lives = 5;
         //lives--;
         CoinText = game.add.text(16, 16, 'Coins: 0', {fontSize: '32px', fill: '#000'});
-        //CoinText2 = game.add.text(16, 16*2, 'Coins: '+lives, { fontSize: '32px', fill: '#f00' });
+
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -323,6 +346,9 @@
     }
 
     function restart () {
+
+        //reset CoinText
+
 
         //revives the player
         player.revive();
