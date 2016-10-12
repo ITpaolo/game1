@@ -282,7 +282,8 @@
             stateText.visible = true;
 
             //the "click to restart" handler
-            game.input.onTap.addOnce(restart,this);
+            game.input.onTap.addOnce(function() {
+            game.state.restart();}, this);
         }
 
         //Jesuz
