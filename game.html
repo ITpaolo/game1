@@ -61,8 +61,8 @@
         background = game.add.sprite(0, 0, 'background');
         background.x = 0;
         background.y = 0;
-        background.height = game.height;
-        background.width = game.width;
+        background.height = 800;
+        background.width = 2000;
 
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = game.add.group();
@@ -81,8 +81,14 @@
 
         //Ledges false / true
         // +65 Width for bridge
-        ledge = platforms.create(300, 500, 'ground');
+        ledge = platforms.create(200, 500, 'ground');
         ledge.body.immovable = true;
+
+        ledge = platforms.create(260, 500, 'ground');
+        ledge.body.immovable = true;
+
+        ledge = platforms.create(350, 500, 'ground');
+        ledge.body.immovable = false;
 
         ledge = platforms.create(525, 450, 'ground');
         ledge.body.immovable = true;
@@ -108,6 +114,9 @@
         ledge.body.immovable = true;
         ledge = platforms.create(1051, 530, 'ground');
         ledge.body.immovable = false;
+        ledge = platforms.create(1116, 530, 'ground');
+        ledge.body.immovable = true;
+
         ledge = platforms.create(1116, 530, 'ground');
         ledge.body.immovable = true;
 
