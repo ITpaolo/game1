@@ -27,7 +27,7 @@
         game.load.image('nokia', 'assets/nokia.png');
         game.load.image('sun', 'assets/sun.png');
         game.load.image('palm', 'assets/palm.png');
-        game.load.image('wand', 'assets/wand.png');
+        game.load.image('crate', 'assets/crate.png');
         game.load.spritesheet('dude', 'assets/dude.png');
 
     }
@@ -127,16 +127,22 @@
         ledge = platforms.create(1600, 420, 'ground');
         ledge.body.immovable = true;
 
-        ledge = platforms.create(1600, 150, 'wand');
-        ledge.body.immovable = true;
 
-        //Wand
-        ledge = platforms.create(1540, 220, 'wand');
+        //crate
+        ledge = platforms.create(1600, 150, 'crate');
         ledge.body.immovable = true;
+        ledge.width = 100;
+        ledge.height = 100;
 
-        ledge = platforms.create(1700, 220, 'wand');
+        ledge = platforms.create(1540, 220, 'crate');
         ledge.body.immovable = true;
+        ledge.width = 100;
+        ledge.height = 100;
 
+        ledge = platforms.create(1700, 220, 'crate');
+        ledge.body.immovable = true;
+        ledge.width = 100;
+        ledge.height = 100;
 
 
         /*
