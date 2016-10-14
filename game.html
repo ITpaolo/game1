@@ -67,6 +67,7 @@
 
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = game.add.group();
+        ledge = game.add.group();
 
         //  We will enable physics for any object that is created in this group
         platforms.enableBody = true;
@@ -124,26 +125,28 @@
         ledge = platforms.create(1400, 440, 'ground');
         ledge.body.immovable = true;
 
-        ledge = platforms.create(1600, 420, 'ground');
+        ledge = platforms.create(1600, 440, 'ground');
         ledge.body.immovable = true;
 
 
         //crate
-        ledge = platforms.create(1600, 150, 'crate');
-        ledge.body.immovable = true;
-        ledge.width = 100;
-        ledge.height = 100;
 
-        ledge = platforms.create(1540, 220, 'crate');
-        ledge.body.immovable = true;
-        ledge.width = 100;
-        ledge.height = 100;
+        ledge = platforms.create(1610, 250, 'crate');
+        ledge.body.immovable = false;
+        ledge.width = 50;
+        ledge.height = 50;
+
+        /*
+        ledge = platforms.create(1650, 250, 'crate');
+        ledge.body.immovable = false;
+        ledge.width = 50;
+        ledge.height = 50;
 
         ledge = platforms.create(1700, 220, 'crate');
-        ledge.body.immovable = true;
-        ledge.width = 100;
-        ledge.height = 100;
-
+        ledge.body.immovable = false;
+        ledge.width = 50;
+        ledge.height = 50; */
+        /*
 
         /*
         // autolevel
@@ -237,7 +240,7 @@
 
         //  Player physics properties. Give the little guy a slight bounce.
         player.body.bounce.y = 0.1;
-        player.body.gravity.y = 500;
+        player.body.gravity.y = 705;
         player.body.collideWorldBounds = false;
         player.width = 32;
         player.height = 60;
@@ -354,6 +357,11 @@
             //the "click to restart" handler
             game.input.onTap.addOnce(function() {
             game.state.restart();}, this);
+        }
+
+        //CrateKill
+        if (ledge.body.y < 700) {
+            ledge.kill();
         }
 
         //Jesuz
