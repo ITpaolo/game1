@@ -28,6 +28,7 @@
         game.load.image('sun', 'assets/sun.png');
         game.load.image('palm', 'assets/palm.png');
         game.load.image('crate', 'assets/crate.png');
+        game.load.image('heart', 'assets/heart.png');
         game.load.spritesheet('dude', 'assets/dude.png');
 
     }
@@ -47,6 +48,11 @@
     var coins;
     var Coins = 0;
     var CoinText;
+
+
+    var heart;
+    var Life = 0;
+    var LifeText;
 
     var box;
     var legde;
@@ -275,6 +281,8 @@
         //lives = 5;
         //lives--;
         CoinText = game.add.text(16, 16, 'Coins: 0', {fontSize: '32px', fill: '#000'});
+        LifeText = game.add.text(16, 40, 'Life:', {fontSize: '32px', fill: '#000'});
+        heart = game.add.sprite(80, 40, 'heart');
 
 
         //  Our controls.
@@ -351,6 +359,7 @@
         if (player.body.y > 700)
         {
             player.kill();
+            heart.kill();
             stateText.text=" GAME OVER \n Click to restart";
             stateText.visible = true;
 
@@ -360,11 +369,12 @@
         }
 
         //CrateKill
-        if (ledge.body.y < 700) {
+        if (ledge.body.y < 220) {
             ledge.kill();
+
         }
 
-        //Jesuz
+        //Jezus
         if (jesus.body.x>1000 || jesus.body.x<0) {
             // bewegung umkehren
             jesus.body.velocity.x *= -1;
