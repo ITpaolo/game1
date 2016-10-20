@@ -300,6 +300,8 @@
         game.camera.follow(player);
         CoinText.fixedToCamera = true;
         stateText.fixedToCamera = true;
+        heart.fixedToCamera = true;
+        LifeText.fixedToCamera = true;
 
 
     }
@@ -348,13 +350,6 @@
             player.body.velocity.y = -350;
         }
 
-        /*console.log(player.body.y);
-        if (player.body.y > 700) {
-            alert(
-                    'Game Over! Lets try again!');
-            location.reload();
-        }*/
-
         // Player Die
         if (player.body.y > 700)
         {
@@ -371,7 +366,8 @@
         //CrateKill
         if (ledge.body.y < 220) {
             ledge.kill();
-
+            //Create Coin if CrateKill
+            //coins.create();
         }
 
         //Jezus
